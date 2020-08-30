@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "620279384971",
+    "firebase_url": "https://castlist-e625c.firebaseio.com",
+    "project_id": "castlist-e625c",
+    "storage_bucket": "castlist-e625c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620279384971:android:e949737c4aae4eb1befd8e",
+        "android_client_info": {
+          "package_name": "com.ntrllog.castlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620279384971-cf1f9tu70fea31k6dbi9r6380fl5vcj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVteS2PI79-OdiUBzXTOvtWWKWEP0QaNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620279384971-cf1f9tu70fea31k6dbi9r6380fl5vcj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
