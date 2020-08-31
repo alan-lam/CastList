@@ -23,50 +23,52 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Log In',
-                style: TextStyle(
-                  fontSize: 40.0,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Log In',
+                  style: TextStyle(
+                    fontSize: 40.0,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 100.0,
-              ),
-              CustomTextField(
-                label: 'email address',
-                onChanged: (email) {
-                  this.email = email;
-                },
-              ),
-              CustomTextField(
-                label: 'password',
-                onChanged: (password) {
-                  this.password = password;
-                },
-                obscureText: true,
-              ),
-              RoundedButton(
-                color: Colors.lightBlue,
-                title: 'Log In',
-                onPressed: () async {
-                  try {
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
-                    if (user != null) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return HomeScreen(firstName: '');
-                      }));
+                SizedBox(
+                  height: 100.0,
+                ),
+                CustomTextField(
+                  label: 'email address',
+                  onChanged: (email) {
+                    this.email = email;
+                  },
+                ),
+                CustomTextField(
+                  label: 'password',
+                  onChanged: (password) {
+                    this.password = password;
+                  },
+                  obscureText: true,
+                ),
+                RoundedButton(
+                  color: Colors.lightBlue,
+                  title: 'Log In',
+                  onPressed: () async {
+                    try {
+                      final user = await _auth.signInWithEmailAndPassword(
+                          email: email, password: password);
+                      if (user != null) {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return HomeScreen(firstName: '');
+                        }));
+                      }
+                    } catch (e) {
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:castlist/ServerService.dart';
 import 'package:castlist/components/episode_pill.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,34 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       episodes = jsonDecode(results)['recommendedEpisodes'];
     });
+  }
+
+  void setFavorite(episodeId, episodeTitle) async {
+    final user = FirebaseAuth.instance.currentUser;
+    dynamic results = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.email)
+        .get();
+    dynamic userFavorites = results.get('favorites');
+    userFavorites[episodeId] = episodeTitle;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.email)
+        .set({'favorites': userFavorites});
+  }
+
+  String getDuration(episode) {
+    List<String> duration = episode['duration'].split(":");
+    int hours = int.parse(duration[0]);
+    int minutes = int.parse(duration[1]);
+    return (hours * 60 + minutes).toString();
+  }
+
+  String getDatePublished(episode) {
+    List<String> date = episode['datePublished'].split(" ");
+    String month = date[2];
+    String day = date[1];
+    return '$month $day';
   }
 
   @override
@@ -165,16 +194,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    List<String> duration =
-                        episodes[index]['duration'].split(":");
-                    int hours = int.parse(duration[0]);
-                    int minutes = int.parse(duration[1]);
-                    String displayMinutes = (hours * 60 + minutes).toString();
                     return EpisodePill(
                       imageURL: episodes[index]['showImageURL'],
                       episodeTitle: episodes[index]['episodeTitle'],
                       description: episodes[index]['description'],
-                      duration: displayMinutes,
+                      duration: getDuration(episodes[index]),
+                      datePublished: getDatePublished(episodes[index]),
+                      episodeId: episodes[index]['episodeId'],
+                      onPressed: setFavorite,
                     );
                   },
                   itemCount: episodes.length,

@@ -21,42 +21,45 @@ class _SignUpNameScreenState extends State<SignUpNameScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 50.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'What\'s your name?',
-                style: TextStyle(
-                  fontSize: 40.0,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'What\'s your name?',
+                  style: TextStyle(
+                    fontSize: 40.0,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 100.0,
-              ),
-              CustomTextField(
-                label: 'First Name',
-                onChanged: (fName) {
-                  firstName = fName;
-                },
-              ),
-              CustomTextField(
-                label: 'Last Name',
-                onChanged: (lName) {
-                  lastName = lName;
-                },
-              ),
-              RoundedButton(
-                color: Colors.lightBlue,
-                title: 'Continue',
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return SignUpEmailScreen(
-                      firstName: firstName,
-                    );
-                  }));
-                },
-              ),
-            ],
+                SizedBox(
+                  height: 100.0,
+                ),
+                CustomTextField(
+                  label: 'First Name',
+                  onChanged: (fName) {
+                    firstName = fName;
+                  },
+                ),
+                CustomTextField(
+                  label: 'Last Name',
+                  onChanged: (lName) {
+                    lastName = lName;
+                  },
+                ),
+                RoundedButton(
+                  color: Colors.lightBlue,
+                  title: 'Continue',
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SignUpEmailScreen(
+                        firstName: firstName,
+                      );
+                    }));
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
